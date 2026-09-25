@@ -10,7 +10,7 @@
 <main>
   <p><a href="index.html">← Mail to Drive</a></p>
   <h1>Datenschutzerklärung</h1>
-  <p class="muted">Stand: 24. September 2026</p>
+  <p class="muted">Stand: 25. September 2026 (Version 1.9.0)</p>
 
   <h2>1. Verantwortlich</h2>
   <p>Marcus Wenzelides, E-Mail: <a href="mailto:m.wenzelides@gmail.com">m.wenzelides@gmail.com</a></p>
@@ -20,16 +20,17 @@
 
   <h2>3. Auf welche Google-Daten die Erweiterung zugreift</h2>
   <ul>
-    <li><strong>Gmail</strong> (Berechtigung <code>gmail.modify</code>): Lesen der E-Mails, die das festgelegte Label tragen, einschließlich Anhängen; Lesen der Label-Liste; Setzen bzw. Entfernen von Labels an gespeicherten E-Mails. Die Erweiterung löscht und versendet keine E-Mails.</li>
-    <li><strong>Google Drive</strong> (Berechtigung <code>drive</code>): Prüfen des gewählten Zielordners und Anlegen von Dateien (PDF, EML, Anhänge) darin. Für die PDF-Umwandlung kann kurzzeitig ein temporäres Dokument angelegt und sofort wieder gelöscht werden. Andere Dateien werden weder gelesen noch verändert.</li>
+    <li><strong>Gmail</strong> (Berechtigung <code>gmail.modify</code>): Lesen der E-Mails, die das festgelegte Label tragen, einschließlich Anhängen; Lesen der Label-Liste; Anlegen des Markierungs-Labels (Standard „Drive/Gespeichert“) und – nur nach Rückfrage in den Einstellungen – dessen Umbenennen; Setzen bzw. Entfernen von Labels an gespeicherten E-Mails; Abfrage des Gmail-Änderungsverlaufs (nur Nachrichten-IDs und Labels neuer bzw. geänderter Nachrichten, keine Inhalte) und bei neuen Antworten die Label-Liste der betreffenden Konversation. Tragen Nachrichten einer Konversation ein festgelegtes Label, überträgt die Erweiterung es auf neue Antworten in dieser Konversation, damit sie ebenfalls gespeichert werden; das lässt sich in den Einstellungen abschalten. Als Anhang weitergeleitete E-Mails und Kalendereinladungen werden – wie die E-Mail selbst – nur lokal im Browser gelesen und als zusätzliche Seiten ins PDF übernommen. Die Erweiterung löscht und versendet keine E-Mails.</li>
+    <li><strong>Google Drive</strong> (Berechtigung <code>drive</code>): Prüfen des gewählten Zielordners (Name, Schreibrecht) und Anlegen von Dateien (PDF, EML, Anhänge) darin – standardmäßig in zwei Unterordnern „PDF“ und „Original-E-Mails“, die die Erweiterung im Zielordner anlegt, wahlweise direkt im Zielordner oder in einem Unterordner pro E-Mail. Jede angelegte Datei erhält unsichtbare technische Merkmale (Nachrichten-ID, Regel, Dateiteil), die Unterordner „PDF“ und „Original-E-Mails“ tragen Ordnerart und Zielordner. Damit erkennt die Erweiterung nach einer Unterbrechung, was schon gespeichert ist, und legt nichts doppelt an. Wird eine E-Mail bewusst neu gespeichert, verschiebt sie die vorher von ihr angelegten Dateien dieser E-Mail im Zielordner und dessen Unterordnern in den Papierkorb. Beim ersten Lauf mit den Unterordnern „PDF“ und „Original-E-Mails“ liest die Erweiterung einmalig die Namen der Dateien, die direkt im Zielordner liegen, und verschiebt die Dateien mit ihrem Namensschema (Name beginnt mit Datum und Uhrzeit, z. B. „2026-09-21T11-19 …“; PDFs nach „PDF“, E-Mails im EML-Format und alle übrigen Anhänge nach „Original-E-Mails“) in diese Unterordner. Dabei wird nichts gelöscht; andere Dateien und Ordner bleiben unverändert. Beim ersten Lauf von Version 1.9 sucht die Erweiterung einmalig anhand ihrer Merkmale die von ihr angelegten Anhangsdateien: E-Mails, zu denen weitergeleitete E-Mails oder Termine nur als Datei abgelegt wurden, werden neu gespeichert (die bisherigen Dateien dieser E-Mail kommen in den Papierkorb), ihre übrigen Anhangsdateien, die keine PDFs sind, werden aus „PDF“ nach „Original-E-Mails“ verschoben. Für die PDF-Umwandlung (Office-Anhänge, Ausweichweg über Google Docs) wird kurzzeitig ein temporäres Dokument angelegt und unmittelbar danach gelöscht; nach einem Abbruch löscht es ein späterer Lauf automatisch. Abgesehen von diesem einmaligen Einsortieren liest und ändert die Erweiterung in Drive nur Dateien und Ordner, die sie selbst angelegt hat; vom Zielordner liest sie nur Name und Schreibrecht. Die Berechtigung <code>drive</code> ist nötig, weil in einen vorhandenen, per Link gewählten Ordner geschrieben wird.</li>
   </ul>
 
   <h2>4. Wo die Daten verarbeitet werden</h2>
   <ul>
-    <li>Die gesamte Verarbeitung findet <strong>lokal im Chrome-Browser des Nutzers</strong> statt. Die Erweiterung kommuniziert ausschließlich direkt mit den Google-Diensten Gmail und Google Drive.</li>
+    <li>Die gesamte Verarbeitung findet <strong>lokal im Chrome-Browser des Nutzers</strong> statt. Die Erweiterung kommuniziert mit Gmail und Google Drive (sowie der Google-Anmeldung); zusätzlich lädt die PDF-Darstellung in der E-Mail verlinkte externe Inhalte (Bilder, Stylesheets, Schriften).</li>
     <li>Es gibt <strong>keinen eigenen Server</strong>. Es werden keine E-Mail-Inhalte, Anhänge oder Kontodaten an den Entwickler oder an Dritte übermittelt.</li>
-    <li>Lokal im Browser gespeichert werden nur die Einstellungen (Label, Zielordner, Optionen), eine Liste bereits gespeicherter Nachrichten-IDs und ein kurzes Protokoll. Diese Daten lassen sich durch Entfernen der Erweiterung löschen.</li>
-    <li>Beim Erstellen eines PDFs werden in der E-Mail eingebettete externe Bilder (z. B. Logos) so geladen, wie es auch beim Öffnen der E-Mail geschieht.</li>
+    <li>Die Einstellungen (Regeln mit Label und Zielordner, Optionen) werden über die Chrome-Synchronisierung mit dem Google-Konto abgeglichen, sofern sie im Chrome-Profil eingeschaltet ist. Lokal liegen außerdem technische Zustandsdaten (Nachrichten- und Konversations-IDs, Fehlerzähler, Verlaufsposition, Zeitpunkt des letzten erfolgreichen Laufs, IDs der Unterordner und Fortschritt des einmaligen Einsortierens) und ein Protokoll der letzten 100 Einträge mit Betreff und Absender gespeicherter Mails; es lässt sich über „Leeren“ löschen. Alle diese Daten werden durch Entfernen der Erweiterung gelöscht.</li>
+    <li>Externe Bilder werden direkt vom Server des Absenders geladen – ohne Googles Bild-Proxy und auch bei Mails, die nie geöffnet wurden. Der Absender kann dabei IP-Adresse und Zeitpunkt sehen. Offensichtliche Zählpixel werden vorher entfernt, und es wird keine Herkunftsadresse (Referrer) mitgesendet. Scripte aus E-Mails werden nicht ausgeführt.</li>
+    <li>Die Chrome-Berechtigung <code>debugger</code> nutzt die Erweiterung ausschließlich für ihre eigene, kurz geöffnete Darstellungsseite, um daraus das PDF zu drucken. Andere Tabs und Webseiten werden weder gelesen noch verändert.</li>
   </ul>
 
   <h2>5. Keine Weitergabe, keine Werbung</h2>
@@ -39,7 +40,7 @@
   <p>Die Nutzung und Übertragung von Informationen, die von Google-APIs empfangen werden, entspricht der <a href="https://developers.google.com/terms/api-services-user-data-policy">Google API Services User Data Policy</a>, einschließlich der Anforderungen zur eingeschränkten Nutzung (Limited Use).</p>
 
   <h2>7. Zugriff widerrufen</h2>
-  <p>Der Zugriff kann jederzeit in den Einstellungen der Erweiterung („Abmelden“) oder unter <a href="https://myaccount.google.com/permissions">myaccount.google.com/permissions</a> widerrufen werden.</p>
+  <p>Der Zugriff kann jederzeit in den Einstellungen der Erweiterung („Abmelden“) oder unter <a href="https://myaccount.google.com/permissions">myaccount.google.com/permissions</a> widerrufen werden. Die bereits in Google Drive gespeicherten Dateien und die Labels in Gmail bleiben dabei erhalten; sie gehören dem Nutzer und lassen sich dort jederzeit löschen.</p>
 
   <h2>8. Kontakt</h2>
   <p>Fragen zum Datenschutz: <a href="mailto:m.wenzelides@gmail.com">m.wenzelides@gmail.com</a></p>
